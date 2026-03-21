@@ -8,21 +8,30 @@ resource "azurerm_resource_group" "example_rg" {
 }
 
 resource "azurerm_virtual_network" "example_vnet" {
-  name                = "example-vnet"
+  name                = var.vnet_name
   location            = azurerm_resource_group.example_rg.location
   resource_group_name = azurerm_resource_group.example_rg.name
   address_space       = ["10.0.0.0/16"]
 }
 
 resource "azurerm_subnet" "example_subnet" {
-  name                 = "example-subnet"
+  name                 = var.subnet_name
   resource_group_name  = azurerm_resource_group.example_rg.name
   virtual_network_name = azurerm_virtual_network.example_vnet.name
   address_prefixes     = ["10.0.1.0/24"]
 }
 
+# Conditional Public IP Assignment
+resource "azurerm_public_ip" "vm_public_ip" {
+  count               = var.environment == "prod" ? 0 : 1
+  name                = var.public_ip
+  location            = azurerm_resource_group.example_rg.location
+  resource_group_name = azurerm_resource_group.example_rg.name
+  allocation_method   = "Static"
+}
+
 resource "azurerm_network_interface" "example_nic" {
-  name                = "example-nic"
+  name                = "examplel-nic"
   location            = azurerm_resource_group.example_rg.location
   resource_group_name = azurerm_resource_group.example_rg.name
 
@@ -53,7 +62,7 @@ resource "azurerm_virtual_machine" "example_vm" {
   storage_image_reference {
     publisher = "Canonical"
     offer     = "0001-com-ubuntu-server-jammy"
-    sku       = "22_04-lts"
+    sku       = var.environment == "prod" ? "24_04-lts" : "22_04-lts"
     version   = "latest"
   }
 

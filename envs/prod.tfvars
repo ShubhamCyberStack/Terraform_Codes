@@ -1,0 +1,7 @@
+environment = "prod"
+location = "eastus"
+resource_group_name = "terraform-prod-rg"
+vm_name = "prod-vm"
+vm_size = "Standard_D2s_v3"
+admin_username = "adminuser"
+admin_password = "Password@123"

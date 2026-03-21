@@ -10,6 +10,28 @@ variable "location" {
   default = "centralindia"
 }
 
+variable "vnet_name" {
+  description = "name of the virtual Network"
+  type = string
+  default = "vnet"
+}
+
+variable "subnet_name" {
+  description = "name of the subnet"
+  type = string
+  default = "subnet"
+}
+
+variable "environment" {
+  description = "Deployment environment (e.g., dev, prod)"
+  type       = string
+}
+
+variable "public_ip" {
+  description = "Name of the public IP address"
+  type = string
+  default = "public-ip-address"
+}
 variable "vm_name" {
   description = "Name of the virtual machine"
   type       = string
@@ -33,4 +55,6 @@ variable "admin_password" {
   type       = string
   sensitive = true
 }
+
+
 
