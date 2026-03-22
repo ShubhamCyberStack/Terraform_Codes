@@ -74,7 +74,7 @@ terraform apply -var-file="envs/production.tfvars"
 
 ## 📖 Learning Resources
 
-If you are new to Terraform, please refer to the [terraform\_guide.pdf](https://www.google.com/search?q=./terraform_guide.pdf) included in this repository. it covers everything from basic installation to advanced resource management.
+If you are new to Terraform, please refer to the terraform_guide.pdf included in this repository. it covers everything from basic installation to advanced resource management.
 
 -----
 
